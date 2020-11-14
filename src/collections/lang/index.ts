@@ -1,5 +1,6 @@
 import russian from './russian';
 import english from './english';
+import china from './china';
 
 export interface Language {
   readonly title: string;
@@ -23,7 +24,12 @@ export const languages = [
     id: 1,
     name: 'English',
     lang: <Language>english
-  }
+  },
+  {
+    id: 2,
+    name: '中文',
+    lang: <Language>china
+  },
 ];
 
 export const getLangById = (id: number) => {
