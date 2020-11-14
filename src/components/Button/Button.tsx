@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Switch = () => {
+const Button = () => {
   return (
     <div>
-      Switch
+      Button
     </div>
   );
 };
 
-export default Switch;
+export default Button;
