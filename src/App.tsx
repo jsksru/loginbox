@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import GlobalStyles from './collections/styles/global';
 import LoginForm from './components/LoginForm';
 import SettingsBar from './components/SettingsBar';
 import styled from 'styled-components';
 
-import { ThemeContext, LangContext } from './collections/contexts';
+import { ThemeContext, LangContext, StateContext } from './collections/contexts';
 import { getLangById } from './collections/lang';
 
 const Window = styled.div`
@@ -20,16 +20,28 @@ const Window = styled.div`
 
 const App = () => {
 
+  const [currentLang, setCurrentLang] = useState(0);
+  const [currentTheme, setCurrentTheme] = useState(0);
+
+  const state = {
+    currentLang,
+    currentTheme,
+    setCurrentLang,
+    setCurrentTheme,
+  };
+
   return (
-    <ThemeContext.Provider value={1}>
-      <LangContext.Provider value={getLangById(0).lang}>
-        <GlobalStyles/>
-        <Window>
-          <SettingsBar/>
-          <LoginForm/>
-        </Window>
-      </LangContext.Provider>
-    </ThemeContext.Provider>
+    <StateContext.Provider value={state}>
+      <ThemeContext.Provider value={currentTheme}>
+        <LangContext.Provider value={getLangById(currentLang).lang}>
+          <GlobalStyles/>
+          <Window>
+            <SettingsBar/>
+            <LoginForm/>
+          </Window>
+        </LangContext.Provider>
+      </ThemeContext.Provider>
+    </StateContext.Provider>
   );
 }
 

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { LangContext } from '../../collections/contexts';
+import { LangContext, StateContext } from '../../collections/contexts';
+import { languages } from '../../collections/lang';
 import styled from 'styled-components';
 
 const StyledBar = styled.div`
@@ -9,15 +10,19 @@ const StyledBar = styled.div`
 `;
 
 const SettingsBar = () => {
+  const state = useContext(StateContext);
   const lang = useContext(LangContext);
+
+  const languageHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    state.setCurrentLang(parseInt(event.target.value));
+  };
 
   return (
     <StyledBar>
       <div>
         <span>{lang.switchLangCaption}: </span>
-        <select>
-          <option value="1">Русский</option>
-          <option value="2">Английский</option>
+        <select onChange={languageHandler}>
+          {languages.map(item => <option value={item.id}>{item.name}</option>)}
         </select>
       </div>
       <div>
