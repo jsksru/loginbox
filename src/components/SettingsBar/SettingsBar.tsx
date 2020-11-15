@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { LangContext, StateContext } from '../../collections/contexts';
 import { languages } from '../../collections/lang';
+import { themes } from '../../collections/themes';
 import styled from 'styled-components';
 
 const StyledBar = styled.div`
@@ -25,14 +26,19 @@ const SettingsBar = () => {
       <div>
         <span>{lang.switchLangCaption}: </span>
         <select onChange={languageHandler}>
-          {languages.map(item => <option value={item.id}>{item.name}</option>)}
+          {languages.map(item => {
+            if (item.id === state.currentLang) return <option value={item.id} selected>{item.name}</option>;
+            return <option value={item.id}>{item.name}</option>;
+          })}
         </select>
       </div>
       <div>
         <span>{lang.switchThemeCaption}: </span>
         <select onChange={themeHandler}>
-          <option value="0">Светлая</option>
-          <option value="1">Темная</option>
+          {themes.map(item => {
+            if (item.id === state.currentTheme) return <option value={item.id} selected>{item.name}</option>;
+            return <option value={item.id}>{item.name}</option>;
+          })}
         </select>
       </div>
     </StyledBar>
