@@ -16,6 +16,9 @@ const SettingsBar = () => {
   const languageHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
     state.setCurrentLang(parseInt(event.target.value));
   };
+  const themeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    state.setCurrentTheme(parseInt(event.target.value));
+  };
 
   return (
     <StyledBar>
@@ -27,9 +30,9 @@ const SettingsBar = () => {
       </div>
       <div>
         <span>{lang.switchThemeCaption}: </span>
-        <select>
+        <select onChange={themeHandler}>
+          <option value="0">Светлая</option>
           <option value="1">Темная</option>
-          <option value="2">Светлая</option>
         </select>
       </div>
     </StyledBar>
